@@ -1,17 +1,24 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+<h1>what</h1>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import GoodsList from './components/goods-list'
 
 export default {
-  name: 'App',
+  name: "App",
+  data() {
+    return {
+      goods: [],
+      API_URL: 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses',
+    }
+  },
   components: {
-    HelloWorld
-  }
-}
+    GoodsList
+  },
+};
 </script>
 
 <style>
