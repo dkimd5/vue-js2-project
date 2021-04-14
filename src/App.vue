@@ -1,23 +1,19 @@
 <template>
   <div id="app">
     <header class="header">
-			<search-goods></search-goods>
-			<cart-goods></cart-goods>
-		</header>
-		<main>
-			<goods-list :goods="filteredGoods"></goods-list>
-			<h2>Todos:</h2>
-			<ol>
-				<li v-for="todo1 in todos" :key="todo1">
-					<todo-list-item :todo="todo1" />
-				</li>
-			</ol>
-		</main>
+      <SearchGoods></SearchGoods>
+      <CartGoods></CartGoods>
+    </header>
+    <main>
+      <GoodsList :goods="filteredGoods"></GoodsList>
+    </main>
   </div>
 </template>
 
 <script>
 import GoodsList from "./components/goods-list";
+import SearchGoods from "./components/search-goods";
+import CartGoods from "./components/cart-goods";
 
 export default {
   name: "App",
@@ -34,6 +30,8 @@ export default {
 
   components: {
     GoodsList,
+    SearchGoods,
+    CartGoods,
   },
 
   methods: {
@@ -44,12 +42,6 @@ export default {
           this.filteredGoods = response;
           this.goods = response;
         });
-    },
-
-    cartShown() {
-      if (this.cart.length() > 0) {
-        this.isVisibleCart = true;
-      }
     },
   },
 

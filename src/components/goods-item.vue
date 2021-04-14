@@ -7,9 +7,17 @@
 
 <script>
 export default {
-  name: "goods-item",
   props: {
-    good: Object,
+    good: {
+      type: Object,
+      required: true,
+    },
   },
+
+//   data() {
+//     return {
+//       gooditem: this.good,
+//     };
+//   },
 };
 </script>

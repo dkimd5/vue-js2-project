@@ -1,6 +1,6 @@
 <template>
   <div class="goods-list">
-    <GoodsItem v-for="good in goods" :key="good"></GoodsItem>
+    <GoodsItem v-for="good in goods" :good="good" v-bind:key="good"></GoodsItem>
   </div>
 </template>
 
@@ -8,7 +8,6 @@
 import GoodsItem from "./goods-item";
 
 export default {
-  name: "goods-list",
   props: {
     goods: Array,
   },

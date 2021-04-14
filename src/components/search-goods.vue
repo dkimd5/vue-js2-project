@@ -1,6 +1,6 @@
 <template>
   <div class="search-wrap">
-    <input type="text" v-model="searchLine" class="goods-search" />
+    <input type="text" v-model="sLine" class="goods-search" />
     <button
       class="search-button"
       type="button"
@@ -13,20 +13,28 @@
 
 <script>
 export default {
-  name: "search-goods",
   props: {
     searchLine: String,
     filteredGoods: Array,
     goods: Array,
+    good: {
+      type: Object,
+      required: true,
+    },
+  },
+
+  data() {
+    return {
+      fGoods: this.filteredGoods,
+      sLine: this.searchLine,
+    };
   },
 
   methods: {
     filterGoods(good_name) {
       console.log("starting");
       const regexp = new RegExp(good_name, "i");
-      this.filteredGoods = this.goods.filter((good) =>
-        regexp.test(good.product_name)
-      );
+      this.fGoods = this.goods.filter((good) => regexp.test(good.product_name));
     },
   },
 };
