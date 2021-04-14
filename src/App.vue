@@ -1,22 +1,60 @@
 <template>
   <div id="app">
-<h1>what</h1>
+    <header class="header">
+			<search-goods></search-goods>
+			<cart-goods></cart-goods>
+		</header>
+		<main>
+			<goods-list :goods="filteredGoods"></goods-list>
+			<h2>Todos:</h2>
+			<ol>
+				<li v-for="todo1 in todos" :key="todo1">
+					<todo-list-item :todo="todo1" />
+				</li>
+			</ol>
+		</main>
   </div>
 </template>
 
 <script>
-import GoodsList from './components/goods-list'
+import GoodsList from "./components/goods-list";
 
 export default {
   name: "App",
   data() {
     return {
       goods: [],
-      API_URL: 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses',
-    }
+      API_URL:
+        "https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses",
+      filteredGoods: [],
+      searchLine: "",
+      cart: [],
+    };
   },
+
   components: {
-    GoodsList
+    GoodsList,
+  },
+
+  methods: {
+    fetchTodos() {
+      return fetch(`${this.API_URL}/catalogData.json`)
+        .then((response) => response.json())
+        .then((response) => {
+          this.filteredGoods = response;
+          this.goods = response;
+        });
+    },
+
+    cartShown() {
+      if (this.cart.length() > 0) {
+        this.isVisibleCart = true;
+      }
+    },
+  },
+
+  mounted() {
+    this.fetchTodos();
   },
 };
 </script>
