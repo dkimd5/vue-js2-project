@@ -13,11 +13,5 @@ export default {
       required: true,
     },
   },
-
-//   data() {
-//     return {
-//       gooditem: this.good,
-//     };
-//   },
 };
 </script>

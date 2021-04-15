@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header class="header">
-      <SearchGoods></SearchGoods>
+      <SearchGoods @searching-good="filterGoods"></SearchGoods>
       <CartGoods></CartGoods>
     </header>
     <main>
@@ -23,7 +23,6 @@ export default {
       API_URL:
         "https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses",
       filteredGoods: [],
-      searchLine: "",
       cart: [],
     };
   },
@@ -42,6 +41,13 @@ export default {
           this.filteredGoods = response;
           this.goods = response;
         });
+    },
+
+    filterGoods(s) {
+      const regexp = new RegExp(s, "i");
+      this.filteredGoods = this.goods.filter((good) =>
+        regexp.test(good.product_name)
+      );
     },
   },
 
