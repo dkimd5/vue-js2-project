@@ -1,22 +1,58 @@
 <template>
-  <div id="app">
-<h1>what</h1>
+  <div>
+    <header class="header">
+      <SearchGoods @searching-good="filterGoods"></SearchGoods>
+      <CartGoods></CartGoods>
+    </header>
+    <main>
+      <GoodsList :goods="filteredGoods"></GoodsList>
+    </main>
   </div>
 </template>
 
 <script>
-import GoodsList from './components/goods-list'
+import GoodsList from "./components/goods-list";
+import SearchGoods from "./components/search-goods";
+import CartGoods from "./components/cart-goods";
 
 export default {
   name: "App",
   data() {
     return {
       goods: [],
-      API_URL: 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses',
-    }
+      API_URL:
+        "https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses",
+      filteredGoods: [],
+      cart: [],
+    };
   },
+
   components: {
-    GoodsList
+    GoodsList,
+    SearchGoods,
+    CartGoods,
+  },
+
+  methods: {
+    fetchTodos() {
+      return fetch(`${this.API_URL}/catalogData.json`)
+        .then((response) => response.json())
+        .then((response) => {
+          this.filteredGoods = response;
+          this.goods = response;
+        });
+    },
+
+    filterGoods(s) {
+      const regexp = new RegExp(s, "i");
+      this.filteredGoods = this.goods.filter((good) =>
+        regexp.test(good.product_name)
+      );
+    },
+  },
+
+  mounted() {
+    this.fetchTodos();
   },
 };
 </script>
