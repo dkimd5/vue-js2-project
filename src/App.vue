@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div>
     <header class="header">
       <SearchGoods @searching-good="filterGoods"></SearchGoods>
       <CartGoods></CartGoods>

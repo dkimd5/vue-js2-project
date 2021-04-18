@@ -10,10 +10,6 @@ export default {
   props: {
     filteredGoods: Array,
     goods: Array,
-    good: {
-      type: Object,
-      required: true,
-    },
   },
 
   data() {
